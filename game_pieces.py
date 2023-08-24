@@ -6,8 +6,9 @@ class Man:
         self.is_king = False
 
 
-class King(Man):
+class King:
 
     def __init__(self, player):
-        super(Man, self).__init__()
+        self.hp = 2
+        self.player = player
         self.is_king = True
