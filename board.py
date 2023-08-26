@@ -22,11 +22,11 @@ class Board:
         for row in range(0, 2):
             for col in range(0, 7):
                 self.data[row][col] = Man(2)
-        self.data[0][3] = King(1)
+        self.data[0][3] = King(2)
         for row in range(5, 7):
             for col in range(0, 7):
                 self.data[row][col] = Man(1)
-        self.data[6][3] = King(2)
+        self.data[6][3] = King(1)
         return self
 
     def display_board(self):
