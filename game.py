@@ -11,27 +11,27 @@ class Game:
 
     @staticmethod
     def get_check_positions(pos_tuple):
-        row, col = pos_tuple[0], pos_tuple[1]
+        col, row = pos_tuple[0], pos_tuple[1]
         position_dict = {
             "adjacent": [
-                (row - 1, col - 1),  # top left
-                (row - 1, col),  # above
-                (row - 1, col + 1),  # top right
-                (row, col - 1),  # left
-                (row, col + 1),  # right
-                (row + 1, col - 1),  # below left
-                (row + 1, col),  # below
-                (row + 1, col + 1),  # below right
+                (col - 1, row - 1),  # top left
+                (col, row - 1),  # above
+                (col + 1, row - 1),  # top right
+                (col - 1, row),  # left
+                (col + 1, row),  # right
+                (col - 1, row + 1),  # below left
+                (col, row + 1),  # below
+                (col + 1, row + 1),  # below right
             ],
             "extended": [
-                (row - 2, col - 2),  # top left
-                (row - 2, col),  # above
-                (row - 2, col + 2),  # top right
-                (row, col - 2),  # left
-                (row, col + 2),  # right
-                (row + 2, col - 2),  # below left
-                (row + 2, col),  # below
-                (row + 2, col + 2),  # below right
+                (col - 2, row - 2),  # top left
+                (col, row - 2),  # above
+                (col + 2, row - 2),  # top right
+                (col - 2, row),  # left
+                (col + 2, row),  # right
+                (col - 2, row + 2),  # below left
+                (col, row + 2),  # below
+                (col + 2, row + 2),  # below right
             ]
         }
         return position_dict
@@ -44,17 +44,18 @@ class Game:
     def get_available_moves(self, pos_tuple):
         possible_moves = []
         possible_jumps = []
-        if self.board.data[pos_tuple[0]][pos_tuple[1]] != 0:
+        if self.board.data[pos_tuple[1]][pos_tuple[0]] != 0:
             position_dict = self.get_check_positions(pos_tuple)
+            # print(position_dict)
             for index in range(0, 8):
-                row = position_dict["adjacent"][index][0]
-                col = position_dict["adjacent"][index][1]
-                x_row = position_dict["extended"][index][0]
-                x_col = position_dict["extended"][index][1]
-                if not self.is_outside((row, col)) and\
+                col = position_dict["adjacent"][index][0]
+                row = position_dict["adjacent"][index][1]
+                x_col = position_dict["extended"][index][0]
+                x_row = position_dict["extended"][index][1]
+                if not self.is_outside((col, row)) and\
                         self.board.data[row][col] == 0:
                     possible_moves.append(position_dict["adjacent"][index])
-                elif not self.is_outside((x_row, x_col)) and\
+                elif not self.is_outside((x_col, x_row)) and\
                         self.board.data[x_row][x_col] == 0:
                     possible_jumps.append(position_dict["extended"][index])
         available_moves = {
@@ -66,6 +67,6 @@ class Game:
     def get_all_moves(self):
         for row in range(0, len(self.board.data)):
             for col in range(0, len(self.board.data[row])):
-                pos_check = (row, col)
+                pos_check = (col, row)
                 my_moves = self.get_available_moves(pos_check)
-                print(f"Moves for ({row}, {col}): {my_moves}")
+                print(f"Moves for ({col}, {row}): {my_moves}")
