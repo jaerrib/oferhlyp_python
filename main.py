@@ -17,13 +17,15 @@ def convert_num_to_letter(num):
 def display_moves(move_list):
     converted_list = []
     for position in move_list["possible_moves"]:
-        col = convert_num_to_letter(position[0] + 1)
-        row = str(position[1] + 1)
-        converted_list.append(col+row)
+        if position is not None:
+            col = convert_num_to_letter(position[0] + 1)
+            row = str(position[1] + 1)
+            converted_list.append(col+row)
     for position in move_list["possible_jumps"]:
-        col = convert_num_to_letter(position[0] + 1)
-        row = str(position[1] + 1)
-        converted_list.append(col+row)
+        if position is not None:
+            col = convert_num_to_letter(position[0] + 1)
+            row = str(position[1] + 1)
+            converted_list.append(col+row)
     print(f"Possible moves/jumps are: {converted_list}")
 
 
@@ -44,14 +46,14 @@ def game_loop():
         print(f"Player {active_player}'s turn")
         selected_token = (input(
             "Enter col number and row number of token to move: "))
-        col = convert_col_to_num(selected_token[0])
+        col = convert_col_to_num(selected_token[0].upper())
         row = int(selected_token[1]) - 1
-        if my_game.board.data[row][col] != 0:
+        if my_game.board.data[row][col] != 0 and my_game.board.data[row][col].player == active_player:
             possible_moves = my_game.get_available_moves((col, row))
             display_moves(possible_moves)
             entered_move = (input(
                 "Enter row number and col number position to move to: "))
-            move_col = convert_col_to_num(entered_move[0])
+            move_col = convert_col_to_num(entered_move[0].upper())
             move_row = int(entered_move[1]) - 1
             move_position = (move_col, move_row)
             if (move_position in possible_moves["possible_moves"]
@@ -59,6 +61,13 @@ def game_loop():
                 my_game.board.data[move_row][move_col] = (
                     my_game.board.data)[row][col]
                 my_game.board.data[row][col] = 0
+            if move_position in possible_moves["possible_jumps"]:
+                jump_index = possible_moves["possible_jumps"].index(move_position)
+                jumped_token = possible_moves["jumpable"][jump_index]
+                if my_game.board.data[jumped_token[1]][jumped_token[0]].player != active_player:
+                    my_game.board.data[jumped_token[1]][jumped_token[0]].hp -= 1
+                    if my_game.board.data[jumped_token[1]][jumped_token[0]].hp == 0:
+                        my_game.board.data[jumped_token[1]][jumped_token[0]] = 0
             active_player = change_player(active_player)
         else:
             print("invalid selection")

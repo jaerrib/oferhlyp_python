@@ -32,7 +32,8 @@ class Game:
                 (col - 2, row + 2),  # below left
                 (col, row + 2),  # below
                 (col + 2, row + 2),  # below right
-            ]
+            ],
+            "jumpable": []
         }
         return position_dict
 
@@ -44,9 +45,9 @@ class Game:
     def get_available_moves(self, pos_tuple):
         possible_moves = []
         possible_jumps = []
+        jumpable = []
         if self.board.data[pos_tuple[1]][pos_tuple[0]] != 0:
             position_dict = self.get_check_positions(pos_tuple)
-            # print(position_dict)
             for index in range(0, 8):
                 col = position_dict["adjacent"][index][0]
                 row = position_dict["adjacent"][index][1]
@@ -58,9 +59,11 @@ class Game:
                 elif not self.is_outside((x_col, x_row)) and\
                         self.board.data[x_row][x_col] == 0:
                     possible_jumps.append(position_dict["extended"][index])
+                    jumpable.append(position_dict["adjacent"][index])
         available_moves = {
             "possible_moves": possible_moves,
             "possible_jumps": possible_jumps,
+            "jumpable": jumpable,
         }
         return available_moves
 
