@@ -1,4 +1,5 @@
 from game_pieces import Man, King
+from os import system
 
 
 class Board:
@@ -30,6 +31,7 @@ class Board:
         return self
 
     def display_board(self):
+        system('clear')
         print("    A  B  C  D  E  F  G")
         for row in range(0, 7):
             print(f"{row + 1} |", end="")
