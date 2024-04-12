@@ -9,8 +9,7 @@ def convert_col_to_num(character):
 
 
 def convert_num_to_letter(num):
-    letters = "ABCDEFG"
-    return letters[num - 1]
+    return chr(ord("A") + num - 1)
 
 
 def display_moves(move_list):
@@ -29,10 +28,7 @@ def display_moves(move_list):
 
 
 def change_player(active_player):
-    if active_player == 1:
-        return 2
-    elif active_player == 2:
-        return 1
+    return 3 - active_player
 
 
 def game_loop():
