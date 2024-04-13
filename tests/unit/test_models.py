@@ -1,6 +1,5 @@
 import unittest
 
-from board import Board
 from game import Game
 
 
