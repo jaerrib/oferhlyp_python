@@ -64,7 +64,7 @@ def game_loop():
                     move_row = int(entered_move[1]) - 1
                     move_position = (move_col, move_row)
                     if move_position in possible_moves["possible_moves"]:
-                        my_game.board.data[move_row][move_col] = (my_game.board.data)[
+                        my_game.board.data[move_row][move_col] = my_game.board.data[
                             row
                         ][col]
                         my_game.board.data[row][col] = 0
