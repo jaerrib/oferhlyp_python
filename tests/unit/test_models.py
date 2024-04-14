@@ -71,6 +71,24 @@ class TestGame(unittest.TestCase):
             },
         )
 
+    def test_change_player(self):
+        self.assertEqual(self.game.active_player, 1)
+        self.game.change_player()
+        self.assertEqual(self.game.active_player, 2)
+        self.game.change_player()
+        self.assertNotEqual(self.game.active_player, 2)
+
+    def test_convert_col_to_num(self):
+        self.assertEqual(self.game.convert_col_to_num("A"), 0)
+        self.assertEqual(self.game.convert_col_to_num("a"), 0)
+        self.assertEqual(self.game.convert_col_to_num("B"), 1)
+        self.assertEqual(self.game.convert_col_to_num("c"), 2)
+        self.assertNotEqual(self.game.convert_col_to_num("D"), 2)
+
+    def test_convert_num_to_letter(self):
+        self.assertEqual(self.game.convert_num_to_letter(1), "B")
+        self.assertEqual(self.game.convert_num_to_letter(5), "F")
+
 
 if __name__ == "__main__":
     unittest.main()
