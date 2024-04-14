@@ -73,3 +73,31 @@ class Game:
                 pos_check = (col, row)
                 my_moves = self.get_available_moves(pos_check)
                 print(f"Moves for ({col}, {row}): {my_moves}")
+
+    def change_player(self):
+        self.active_player = 3 - self.active_player
+
+    @staticmethod
+    def convert_col_to_num(character):
+        letters = "ABCDEFG"
+        for index in range(0, len(letters)):
+            if character.upper() == letters[index]:
+                return index
+
+    @staticmethod
+    def convert_num_to_letter(num):
+        return chr(ord("A") + num)
+
+    def get_moves_list(self, move_list):
+        converted_list = []
+        for position in move_list["possible_moves"]:
+            if position is not None:
+                col = self.convert_num_to_letter(position[0])
+                row = str(position[1] + 1)
+                converted_list.append(col + row)
+        for position in move_list["possible_jumps"]:
+            if position is not None:
+                col = self.convert_num_to_letter(position[0])
+                row = str(position[1] + 1)
+                converted_list.append(col + row)
+        return converted_list
