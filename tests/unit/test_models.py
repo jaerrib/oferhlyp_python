@@ -12,6 +12,8 @@ class TestGame(unittest.TestCase):
         self.assertEqual(self.game.move_list, {})
         self.assertEqual(self.game.result, "")
         self.assertEqual(self.game.active_player, 1)
+        self.assertEqual(self.game.game_over, False)
+        self.assertEqual(self.game.turn_over, False)
 
     def test_get_check_positions(self):
         self.assertEqual(

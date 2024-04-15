@@ -3,13 +3,12 @@ from game import Game
 
 def game_loop():
     my_game = Game()
-    game_over = False
     my_game.active_player = 2
-    while not game_over:
+    while not my_game.game_over:
         jumped_list = []
-        turn_over = False
+        my_game.turn_over = False
         my_game.change_player()
-        while not turn_over:
+        while not my_game.turn_over:
             my_game.board.display_board()
             print(jumped_list)
             print(f"Player {my_game.active_player}'s turn")
@@ -17,7 +16,7 @@ def game_loop():
                 "Enter col number and row number of token to move or type 'end turn': "
             )
             if selected_token == "end turn":
-                turn_over = True
+                my_game.turn_over = True
             else:
                 col = my_game.convert_col_to_num(selected_token[0])
                 row = int(selected_token[1]) - 1
@@ -40,7 +39,7 @@ def game_loop():
                             row
                         ][col]
                         my_game.board.data[row][col] = 0
-                        turn_over = True
+                        my_game.turn_over = True
                     if move_position in possible_moves["possible_jumps"]:
                         jump_index = possible_moves["possible_jumps"].index(
                             move_position
@@ -64,7 +63,7 @@ def game_loop():
                                 my_game.board.data[jumped_token[1]][jumped_token[0]].hp
                                 == 0
                             ):
-                                game_over = my_game.board.data[jumped_token[1]][
+                                my_game.game_over = my_game.board.data[jumped_token[1]][
                                     jumped_token[0]
                                 ].is_king
                                 my_game.board.data[jumped_token[1]][jumped_token[0]] = 0
@@ -77,7 +76,7 @@ def game_loop():
                                 my_game.board.data
                             )[row][col]
                             my_game.board.data[row][col] = 0
-                            turn_over = True
+                            my_game.turn_over = True
                         else:
                             print("invalid selection")
                 else:

@@ -8,6 +8,8 @@ class Game:
         self.move_list = {}
         self.result = ""
         self.active_player = 1
+        self.game_over = False
+        self.turn_over = False
 
     @staticmethod
     def get_check_positions(pos_tuple):
