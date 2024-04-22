@@ -91,6 +91,17 @@ class TestGame(unittest.TestCase):
         self.assertEqual(self.game.convert_num_to_letter(1), "B")
         self.assertEqual(self.game.convert_num_to_letter(5), "F")
 
+    def test_turn_reset(self):
+        self.game.jumped_list = ["not empty"]
+        self.game.turn_over = True
+        self.assertNotEqual(self.game.jumped_list, [])
+        self.assertNotEqual(self.game.turn_over, False)
+        self.assertNotEqual(self.game.active_player, 2)
+        self.game.reset_turn()
+        self.assertEqual(self.game.jumped_list, [])
+        self.assertEqual(self.game.turn_over, False)
+        self.assertEqual(self.game.active_player, 2)
+
 
 if __name__ == "__main__":
     unittest.main()
