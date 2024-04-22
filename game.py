@@ -6,6 +6,7 @@ class Game:
     def __init__(self):
         self.board = Board()
         self.move_list = {}
+        self.jumped_list = []
         self.result = ""
         self.active_player = 1
         self.game_over = False
@@ -103,3 +104,9 @@ class Game:
                 row = str(position[1] + 1)
                 converted_list.append(col + row)
         return converted_list
+
+    def reset_turn(self):
+        self.jumped_list = []
+        self.turn_over = False
+        self.change_player()
+        return self
