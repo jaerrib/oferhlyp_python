@@ -2,14 +2,46 @@ from game import Game
 
 
 def game_loop():
-    my_game = Game()
-    my_game.active_player = 2
-    while not my_game.game_over:
-        my_game.reset_turn()
-        while not my_game.turn_over:
-            turn_loop(my_game)
-    my_game.board.display_board()
+    game = Game()
+    game.active_player = 2
+    while not game.game_over:
+        game.reset_turn()
+        while not game.turn_over:
+            turn_loop(game)
+    game.board.display_board()
     print("Game Over")
+
+
+def complete_move(game, move_col, move_row, col, row):
+    game.board.data[move_row][move_col] = game.board.data[row][col]
+    game.board.data[row][col] = 0
+
+
+def jump_loop(game, move_position, col, row, possible_moves):
+    move_col, move_row = move_position[0], move_position[1]
+    jump_index = possible_moves["possible_jumps"].index(move_position)
+    jumped_token = possible_moves["jumpable"][jump_index]
+    print("In list?", jumped_token in game.jumped_list)
+
+    if (
+        game.board.data[jumped_token[1]][jumped_token[0]].player != game.active_player
+    ) and jumped_token not in game.jumped_list:
+        game.board.data[move_row][move_col] = game.board.data[row][col]
+        game.board.data[row][col] = 0
+        game.board.data[jumped_token[1]][jumped_token[0]].hp -= 1
+        game.jumped_list.append(game.board.data[jumped_token[1]][jumped_token[0]])
+        if game.board.data[jumped_token[1]][jumped_token[0]].hp == 0:
+            game.game_over = game.board.data[jumped_token[1]][jumped_token[0]].is_king
+            game.board.data[jumped_token[1]][jumped_token[0]] = 0
+    elif (
+        game.board.data[jumped_token[1]][jumped_token[0]].player == game.active_player
+        and jumped_token not in game.jumped_list
+    ):
+        game.board.data[move_row][move_col] = game.board.data[row][col]
+        game.board.data[row][col] = 0
+        game.turn_over = True
+    else:
+        input("invalid selection - Press a <Enter> to continue")
 
 
 def turn_loop(game):
@@ -37,38 +69,9 @@ def turn_loop(game):
             move_row = int(entered_move[1]) - 1
             move_position = (move_col, move_row)
             if move_position in possible_moves["possible_moves"]:
-                game.board.data[move_row][move_col] = game.board.data[row][col]
-                game.board.data[row][col] = 0
+                complete_move(game, move_col, move_row, col, row)
                 game.turn_over = True
             if move_position in possible_moves["possible_jumps"]:
-                jump_index = possible_moves["possible_jumps"].index(move_position)
-                jumped_token = possible_moves["jumpable"][jump_index]
-                print("In list?", jumped_token in game.jumped_list)
-
-                if (
-                    game.board.data[jumped_token[1]][jumped_token[0]].player
-                    != game.active_player
-                ) and jumped_token not in game.jumped_list:
-                    game.board.data[move_row][move_col] = game.board.data[row][col]
-                    game.board.data[row][col] = 0
-                    game.board.data[jumped_token[1]][jumped_token[0]].hp -= 1
-                    game.jumped_list.append(
-                        game.board.data[jumped_token[1]][jumped_token[0]]
-                    )
-                    if game.board.data[jumped_token[1]][jumped_token[0]].hp == 0:
-                        game.game_over = game.board.data[jumped_token[1]][
-                            jumped_token[0]
-                        ].is_king
-                        game.board.data[jumped_token[1]][jumped_token[0]] = 0
-                elif (
-                    game.board.data[jumped_token[1]][jumped_token[0]].player
-                    == game.active_player
-                    and jumped_token not in game.jumped_list
-                ):
-                    game.board.data[move_row][move_col] = game.board.data[row][col]
-                    game.board.data[row][col] = 0
-                    game.turn_over = True
-                else:
-                    print("invalid selection")
+                jump_loop(game, move_position, col, row, possible_moves)
         else:
-            print("invalid selection")
+            input("invalid selection - Press a <Enter> to continue")
