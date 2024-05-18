@@ -60,6 +60,7 @@ class Game:
                 elif (
                     not self.is_outside((x_col, x_row))
                     and self.board.data[x_row][x_col] == 0
+                    and self.board.data[x_row][x_col] not in self.jumped_list
                 ):
                     possible_jumps.append(position_dict["extended"][index])
                     jumpable.append(position_dict["adjacent"][index])
@@ -104,6 +105,22 @@ class Game:
                 row = str(position[1] + 1)
                 converted_list.append(col + row)
         return converted_list
+
+    def get_jumped_position(self, move_col, move_row, col, row):
+        if move_col == col:
+            jumped_col = move_col
+        elif move_col > col:
+            jumped_col = move_col - 1
+        else:
+            jumped_col = move_col + 1
+        if move_row == row:
+            jumped_row = move_row
+        elif move_row > row:
+            jumped_row = move_row - 1
+        else:
+            jumped_row = move_row + 1
+        jumped_position = (jumped_col, jumped_row)
+        return jumped_position
 
     def reset_turn(self):
         self.jumped_list = []
