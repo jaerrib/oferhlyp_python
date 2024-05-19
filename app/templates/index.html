@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block main_content %}
+
+<div class="d-flex justify-content-center">
+    <div class="row">
+
+        <!-- Left Col -->
+        <div class="col">
+            <!-- Game Area -->
+            <div>
+                <!-- Letter Row -->
+                <div class="d-flex">
+                    <div class="square"></div>
+                    {% for letter in "ABCDEFG" %}
+                    <div class="square">{{letter}}</div>
+                    {% endfor %}
+                </div>
+                <!-- End Letter Row -->
+                <!--  Game Board -->
+                {% for row in range(1, 8) %}
+                <div class="d-flex">
+                    <div class="square">{{row}}</div>
+                    {% for col in range(1, 8) %}
+                    <a href="/process/{{row}}/{{col}}">
+                        <div class="square bg-secondary border border-secondary-subtle">
+
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+                {% endfor %}
+                <!-- End Game Board -->
+            </div>
+            <!--End Game Area-->
+        </div>
+    </div>
+
+</div>
+
+{% endblock main_content %}

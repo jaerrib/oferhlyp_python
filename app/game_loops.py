@@ -1,4 +1,4 @@
-from game import Game
+from app.game import Game
 
 
 def game_loop():

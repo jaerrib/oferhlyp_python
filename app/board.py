@@ -1,5 +1,6 @@
-from game_pieces import Man, King
 from os import system
+
+from app.game_pieces import Man, King
 
 
 class Board:
