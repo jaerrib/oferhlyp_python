@@ -17,12 +17,76 @@
                 </div>
                 <!-- End Letter Row -->
                 <!--  Game Board -->
-                {% for row in range(1, 8) %}
+                {% for row in range(0, 7) %}
                 <div class="d-flex">
-                    <div class="square">{{row}}</div>
-                    {% for col in range(1, 8) %}
+                    <div class="square">{{row+1}}</div>
+                    {% for col in range(0, 7) %}
                     <a href="/process/{{row}}/{{col}}">
                         <div class="square bg-secondary border border-secondary-subtle">
+
+                            <!--Is the square empty?-->
+                            {% if data.board[row][col] != 0 %}
+
+
+                            <!--Does the token belong to player 1? -->
+                            {% if data.board[row][col].player == 1 %}
+                            <!--Is it a king? -->
+                            {% if data.board[row][col].is_king %}
+                            <!--Has 2 HP? -->
+                            {% if data.board[row][col].hp == 2 %}
+                            <img src="{{ url_for('static', filename='img/dark-king-full.svg') }}"
+                                 class="stone">
+                            {% else %}
+                            <!--Only has 1 HP -->
+                            <img src="{{ url_for('static', filename='img/dark-king-half.svg') }}"
+                                 class="stone">
+                            {% endif %}
+
+                            {% else %}
+                            <!--Not a king-->
+                            <!--Has 2 HP? -->
+                            {% if data.board[row][col].hp == 2 %}
+                            <img src="{{ url_for('static', filename='img/dark-full.svg') }}"
+                                 class="stone">
+                            {% else %}
+                            <!--Only has 1 HP -->
+                            <img src="{{ url_for('static', filename='img/dark-half.svg') }}"
+                                 class="stone">
+                            {% endif %}
+
+                            {% endif %}
+
+                            {% else %}
+                            <!--Belongs to player 2? -->
+                            <!--Is it a king? -->
+                            {% if data.board[row][col].is_king %}
+                            <!--Has 2 HP? -->
+                            {% if data.board[row][col].hp == 2 %}
+                            <img src="{{ url_for('static', filename='img/light-king-full.svg') }}"
+                                 class="stone">
+                            {% else %}
+                            <!--Only has 1 HP -->
+                            <img src="{{ url_for('static', filename='img/light-king-half.svg') }}"
+                                 class="stone">
+                            {% endif %}
+
+                            {% else %}
+                            <!--Not a king-->
+                            <!--Has 2 HP? -->
+                            {% if data.board[row][col].hp == 2 %}
+                            <img src="{{ url_for('static', filename='img/light-full.svg') }}"
+                                 class="stone">
+                            {% else %}
+                            <!--Only has 1 HP -->
+                            <img src="{{ url_for('static', filename='img/light-half.svg') }}"
+                                 class="stone">
+                            {% endif %}
+
+                            {% endif %}
+                            {% endif %}
+
+
+                            {% endif %}
 
                         </div>
                     </a>
