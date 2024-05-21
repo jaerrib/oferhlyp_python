@@ -11,6 +11,8 @@ class Game:
         self.active_player = 1
         self.game_over = False
         self.turn_over = False
+        self.active_row = None
+        self.active_col = None
 
     @staticmethod
     def get_check_positions(pos_tuple):

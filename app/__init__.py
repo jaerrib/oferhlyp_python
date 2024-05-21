@@ -1,7 +1,6 @@
 from flask import Flask, render_template, redirect, session
 
 from app.game import Game
-from app.game_loops import game_loop
 
 app = Flask(__name__)
 app.secret_key = "dev"
@@ -9,8 +8,6 @@ app.secret_key = "dev"
 
 @app.route("/")
 def index():
-    if "data" in session:
-        session.pop("data")
     if "data" not in session:
         game = Game()
         game.active_player = 2
@@ -21,13 +18,17 @@ def index():
             "active_player": game.active_player,
             "game_over": game.game_over,
             "turn_over": game.turn_over,
+            "active_row": game.active_row,
+            "active_col": game.active_col,
         }
     return render_template("index.html", data=session["data"])
 
 
 @app.route("/process/<int:row>/<int:col>")
 def process(row, col):
-    return redirect("/")
+    session["data"]["active_row"] = row
+    session["data"]["active_col"] = col
+    return render_template("index.html", data=session["data"])
 
 
 @app.route("/reset")
