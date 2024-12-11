@@ -110,3 +110,19 @@ def turn_loop(game):
                 jump_loop(game, move_position, col, row)
         else:
             input("invalid selection - Press a <Enter> to continue")
+
+
+def assign_selected(data, row, col):
+    active_row = int(data["active_row"])
+    active_col = int(data["active_col"])
+    data["board"][row][col] = data["active_token"]
+    data["board"][active_row][active_col] = 0
+
+    return data
+
+
+def select_token(data, row, col):
+    data["active_token"] = data["board"][row][col]
+    data["active_row"] = row
+    data["active_col"] = col
+    return data

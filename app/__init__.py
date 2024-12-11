@@ -1,6 +1,7 @@
-from flask import Flask, render_template, redirect, session
+from flask import Flask, redirect, render_template, session
 
 from app.game import Game
+from app.game_loops import assign_selected, select_token
 
 app = Flask(__name__)
 app.secret_key = "dev"
@@ -20,14 +21,18 @@ def index():
             "turn_over": game.turn_over,
             "active_row": game.active_row,
             "active_col": game.active_col,
+            "active_token": None,
         }
     return render_template("index.html", data=session["data"])
 
 
 @app.route("/process/<int:row>/<int:col>")
 def process(row, col):
-    session["data"]["active_row"] = row
-    session["data"]["active_col"] = col
+
+    if session["data"]["board"][row][col] != 0:
+        session["data"] = select_token(session["data"], row, col)
+    else:
+        session["data"] = assign_selected(session["data"], row, col)
     return render_template("index.html", data=session["data"])
 
 

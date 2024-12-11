@@ -1,6 +1,6 @@
 from os import system
 
-from app.game_pieces import Man, King
+from app.game_pieces import King, Man
 
 
 class Board:
@@ -41,9 +41,9 @@ class Board:
                     print("__|", end="")
                 else:
                     class_type = type(self.data[row][col]).__name__[:1]
-                    if self.data[row][col].hp == 1:
+                    if self.data[row][col]["hp"] == 1:
                         class_type = class_type.lower()
-                    player = self.data[row][col].player
+                    player = self.data[row][col]["player"]
                     print(f"{class_type}{player}|", end="")
             print("")
         print("")
