@@ -118,6 +118,7 @@ def assign_selected(data, row, col):
     data["board"][row][col] = data["active_token"]
     data["board"][active_row][active_col] = 0
     data["active_player"] = 3 - data["active_player"]
+    data["active_token"] = None
     return data
 
 
