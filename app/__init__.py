@@ -28,10 +28,16 @@ def index():
 
 @app.route("/process/<int:row>/<int:col>")
 def process(row, col):
-
-    if session["data"]["board"][row][col] != 0:
+    # Check if the selected board position contains a token belonging to the player
+    if (
+        session["data"]["board"][row][col] != 0
+        and session["data"]["board"][row][col]["player"]
+        == session["data"]["active_player"]
+    ):
         session["data"] = select_token(session["data"], row, col)
-    else:
+    elif (
+        session["data"]["active_token"] is not None and not session["data"]["game_over"]
+    ):
         session["data"] = assign_selected(session["data"], row, col)
     return render_template("index.html", data=session["data"])
 

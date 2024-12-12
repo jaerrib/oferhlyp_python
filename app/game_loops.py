@@ -113,11 +113,11 @@ def turn_loop(game):
 
 
 def assign_selected(data, row, col):
-    active_row = int(data["active_row"])
-    active_col = int(data["active_col"])
+    active_row = data["active_row"]
+    active_col = data["active_col"]
     data["board"][row][col] = data["active_token"]
     data["board"][active_row][active_col] = 0
-
+    data["active_player"] = 3 - data["active_player"]
     return data
 
 
