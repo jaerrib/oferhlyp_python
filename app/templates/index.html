@@ -106,6 +106,16 @@
             </div>
             <!--End Game Area-->
         </div>
+
+        <!--  Game Messages -->
+        <div class="col">
+        {% if data.actively_jumping %}
+            <a class="btn btn-info" href="/end-turn">End Turn</a>
+        {% endif %}
+        {% if data.game_over %}
+            <p class="fs-2 fw-bold">Game Over</p>
+        {% endif %}
+        </div>
     </div>
 
 </div>
