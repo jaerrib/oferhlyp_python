@@ -81,7 +81,7 @@ def get_available_moves(data, pos_tuple):
             elif (
                 not is_outside((x_col, x_row))
                 and data["board"][x_row][x_col] == 0
-                and "(x_col, x_row)" not in data["jumped_list"]
+                and (x_row, x_col) not in data["jumped_list"]
             ):
                 possible_jumps.append(position_dict["extended"][index])
                 jumpable.append(position_dict["adjacent"][index])
