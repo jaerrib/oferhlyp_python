@@ -6,9 +6,9 @@ def assign_jump(data, move_position, col, row):
         data = assign_selected(data, move_row, move_col)
         turn_reset(data)
         return data
-    elif jumped_token not in data["jumped_list"]:
+    elif jumped_position not in data["jumped_list"]:
         data = assign_selected(data, move_row, move_col)
-        data["jumped_list"].append(jumped_token)
+        data["jumped_list"].append(jumped_position)
         jumped_token["hp"] -= 1
         if jumped_token["hp"] == 0:
             data["game_over"] = jumped_token["is_king"]
@@ -37,6 +37,8 @@ def assign_jump(data, move_position, col, row):
             data["active_row"] = current_position[1]
             data["active_col"] = current_position[0]
             data["possible_moves"] = get_available_moves(data, current_position)
+        return data
+    else:
         return data
 
 
@@ -79,7 +81,7 @@ def get_available_moves(data, pos_tuple):
             elif (
                 not is_outside((x_col, x_row))
                 and data["board"][x_row][x_col] == 0
-                and data["board"][x_row][x_col] not in data["jumped_list"]
+                and "(x_col, x_row)" not in data["jumped_list"]
             ):
                 possible_jumps.append(position_dict["extended"][index])
                 jumpable.append(position_dict["adjacent"][index])
