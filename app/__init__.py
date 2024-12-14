@@ -50,10 +50,12 @@ def process(row, col):
         session["data"]["active_token"] is not None and not session["data"]["game_over"]
     ):
         move_position = (col, row)
-        if move_position in session["data"]["possible_moves"]["possible_moves"]:
+        if (
+            move_position in session["data"]["possible_moves"]["possible_moves"]
+            and session["data"]["actively_jumping"] == False
+        ):
             session["data"] = assign_selected(session["data"], row, col)
             session["data"] = turn_reset(session["data"])
-            session["data"]["actively_jumping"] = False
         elif move_position in session["data"]["possible_moves"]["possible_jumps"]:
             session["data"] = assign_jump(
                 session["data"],
