@@ -76,12 +76,17 @@ def get_available_moves(data, pos_tuple):
             row = position_dict["adjacent"][index][1]
             x_col = position_dict["extended"][index][0]
             x_row = position_dict["extended"][index][1]
-            if not is_outside((row, col)) and data["board"][row][col] == 0:
+            if (
+                not is_outside((row, col))
+                and data["board"][row][col] == 0
+                and not data["actively_jumping"]
+            ):
                 possible_moves.append(position_dict["adjacent"][index])
             elif (
                 not is_outside((x_col, x_row))
                 and data["board"][x_row][x_col] == 0
-                and (x_row, x_col) not in data["jumped_list"]
+                and (col, row) not in data["jumped_list"]
+                and data["board"][row][col] != 0
             ):
                 possible_jumps.append(position_dict["extended"][index])
                 jumpable.append(position_dict["adjacent"][index])
