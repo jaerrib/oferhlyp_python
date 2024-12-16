@@ -1,0 +1,133 @@
+{% block rules %}
+<div class="offcanvas offcanvas-end" tabindex="-1" id="rules"
+     aria-labelledby="rules">
+    <div class="offcanvas-header">
+        <h1 class="offcanvas-title" id="offcanvasRules">How to Play</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div>
+            <p class="fs-6 fw-bold">This app uses Oferhlýp rules version
+                2.2.2</p>
+            <h2>Overview</h2>
+            <p>
+                <em>Oferhlýp</em> is a free libre open source abstract strategy
+                game played between two players on a 7x7 grid. On the surface,
+                gameplay is similar to checkers (draughts). However, there are
+                several differences:
+            </p>
+            <ul>
+                <li>Tokens may move in any direction rather than just forwards
+                    diagonally.
+                </li>
+                <li>A player’s own pieces may be jumped to create a more dynamic
+                    game.
+                </li>
+                <li>Tokens must be jumped twice before they are removed from the
+                    board
+                </li>
+                <li>Each player has a king token that must be captured to end
+                    the game.
+                </li>
+            </ul>
+            <hr>
+            <h3 class="mt-5">Objective</h3>
+            <p>
+                Players try to eliminate their opponent’s king via jumping
+                attacks while protecting their own king.
+            </p>
+            <h3 class="mt-5">Starting the game</h3>
+            <p>
+                Players place their tokens on the squares comprising the two
+                rows closest to them with the king occupying the middle square
+                of the edge row. Placement is closer to chess rather than
+                checkers as all squares are utilized regardless of color.
+            </p>
+            <p>All tokens start at <em>full-strength</em> status with the double
+                rune symbol side up.
+            </p>
+            <p>
+                Players choose which color (light or dark) to use with the dark
+                color taking the first turn. Players then alternate taking
+                turns.
+            </p>
+            <h2 class="mt-5">Playing the game</h2>
+            <p>On a player’s turn, the player may *move* or *attack* with one
+                token.</p>
+            <h4>Moving</h4>
+            <ul>
+                <li>
+                    Tokens may move one square in any direction onto an open
+                    square.
+                </li>
+                <li>
+                    A token belonging to the player may be jumped in a legal
+                    move called a <em>friendly jump</em>. Making more than one
+                    friendly jump per turn is not permitted.
+                </li>
+                <li>
+                    A player may not follow a move or friendly jump by an
+                    attack. A player may not follow an attack and with a move or
+                    friendly jump.
+                </li>
+            </ul>
+            <h3 class="mt-5">Attacking</h3>
+            <ul>
+                <li>
+                    Players may *attack* an opponent’s token by jumping directly
+                    over it to an open square. Attacks are not compulsory.
+                </li>
+                <li>
+                    Players may perform a <em>chain attack</em> by jumping more
+                    than one of their opponent’s tokens in a sequence (similar
+                    to checkers) following the normal attack rule.
+                </li>
+                <li>
+                    After being attacked, tokens at <em>full-strength</em>
+                    status are flipped over to the single rune side to signify
+                    that they are now at <em>half-strength</em>.
+                </li>
+                <li>
+                    Tokens at <em>half-strength</em> status are removed from the
+                    board after being attacked a second time and are out of
+                    play.
+                </li>
+                <li>
+
+                    Tokens may not be attacked more than once per turn, even as
+                    part of a chain attack. Players also cannot simply jump over
+                    a token then jump back over the same token.
+                </li>
+            </ul>
+            <hr>
+            <h2 class="mt-5">Winning the game</h2>
+            <p>
+                Players continue to alternate turns until one of the kings has
+                been eliminated.
+            </p>
+            <p>
+                A <em>stalemate</em> occurs if the two kings are the last pieces
+                on the board as neither player could move without placing their
+                own king into a position which would be vulnerable to an<em>attack</em>.
+            </p>
+            <p>
+                Perpetual repetition is illegal. If a board position is repeated
+                three times, the player in control of the situation must find
+                another move.
+            </p>
+            <hr>
+            <h2 class="mt-5">License</h2>
+            <p>Oferhlýp the game is licensed as <a
+                    href="https://creativecommons.org/licenses/by-sa/4.0/"
+                    target="_blank">CC BY-SA</a> while the code for this
+                web-based version is licensed under the <a
+                        href="https://www.gnu.org/licenses/agpl-3.0.html"
+                        target="_blank">AGPL</a>.</p>
+            <strong><a href="https://jaerrib.codeberg.page/oferhlyp/"
+                       target="_blank">More information about
+                Oferhlýp</a></strong>
+        </div>
+    </div>
+</div>
+{% endblock rules %}
