@@ -1,9 +1,7 @@
 {% extends "base.html" %}
 {% block main_content %}
 
-<div class="d-flex justify-content-center">
-    <div class="row">
-
+<div class="row row-cols-1 row-cols-lg-2 justify-content-between mx-auto">
         <!-- Left Col -->
         <div class="col">
             <!-- Game Area -->
@@ -109,7 +107,10 @@
 
         <!--  Game Messages -->
         <div class="col">
+        <p class="fs-4 fw-bold">Player {{ data.active_player }}'s turn</p>
+        <hr>
         {% if data.actively_jumping %}
+            <p class="fs-3 fw-bold">Player {{ data.active_player }} is jumping</p>
             <a class="btn btn-info" href="/end-turn">End Turn</a>
         {% endif %}
         {% if data.game_over %}
@@ -117,7 +118,5 @@
         {% endif %}
         </div>
     </div>
-
-</div>
 
 {% endblock main_content %}
