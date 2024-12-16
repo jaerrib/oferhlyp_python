@@ -10,20 +10,27 @@
           href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet"
           href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-    <!--    <link rel="shortcut icon"-->
-    <!--          href="{{ url_for('static', filename='img/favicon.ico') }}">-->
+    <link rel="apple-touch-icon" sizes="180x180"
+          href="{{ url_for('static', filename='img/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32"
+          href="{{ url_for('static', filename='img/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16"
+          href="{{ url_for('static', filename='img/favicon-16x16.png') }}">
+    <link rel="manifest"
+          href="{{ url_for('static', filename='img/site.webmanifest') }}">
 </head>
 
 <body>
 {% block header %} {% include "header.html" %} {% endblock header %}
 
-{% block main_content %} {% endblock main_content %}
+<main class="min-vh-100">
+    <div class="container">
+        {% block main_content %} {% endblock main_content %}
+    </div>
+</main>
 
 {% block footer %} {% include "footer.html" %} {% endblock footer %}
 </body>
-<script src="{{ url_for('static',filename='js/htmx.min.js') }}"></script>
+
 <script src="{{ url_for('static',filename='js/bootstrap.bundle.min.js') }}"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
-        crossorigin="anonymous"></script>
 </html>
