@@ -1,6 +1,6 @@
 {% block footer %}
 <div class="container">
-    <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top">
+    <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-3 py-5 my-5 border-top">
 
         <div class="col mb-3">
             <ul class="nav flex-column">
@@ -13,13 +13,39 @@
             </ul>
         </div>
 
-        <div class="col mb-3"></div>
+        <div class="col mb-3">
+            <p class="fs-5">Board Game</p>
+            <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a
+                        href="https://jaerrib.codeberg.page/oferhlyp/"
+                        class="nav-link p-0 text-body-secondary">About</a></li>
+                <li class="nav-item mb-2"><a
+                        data-bs-toggle="offcanvas"
+                        href="#rules" aria-controls="rules"
+                        class="nav-link p-0 text-body-secondary">How to Play</a>
+                </li>
+                <li class="nav-item mb-2"><a
+                        href="https://codeberg.org/jaerrib/oferhlyp"
+                        class="nav-link p-0 text-body-secondary">Print-and-Play
+                    version</a></li>
+            </ul>
+        </div>
 
-        <div class="col mb-3"></div>
+        <div class="col mb-3">
+            <p class="fs-5">Contact</p>
+            <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a
+                        href="mailto:jaerrib[at]tutanota[dot]com"
+                        target="_blank"
+                        class="nav-link p-0 text-body-secondary">Email</a></li>
+                <li class="nav-item mb-2"><a
+                        href="https://mastodon.social/@johnbeers"
+                        target="_blank"
+                        class="nav-link p-0 text-body-secondary">Mastodon</a>
+                </li>
+            </ul>
+        </div>
 
-        <div class="col mb-3"></div>
-
-        <div class="col mb-3"></div>
     </footer>
 </div>
 {% endblock footer %}
