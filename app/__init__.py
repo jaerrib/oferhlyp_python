@@ -21,7 +21,7 @@ def index():
         game.active_player = 1
         session["data"] = {
             "board": game.board.data,
-            "move_list": game.move_list,
+            "move_list": [],
             "jumped_list": game.jumped_list,
             "active_player": game.active_player,
             "game_over": game.game_over,
@@ -30,6 +30,7 @@ def index():
             "active_token": None,
             "actively_jumping": False,
             "possible_moves": [],
+            "move_string": "",
         }
     return render_template("index.html", data=session["data"])
 

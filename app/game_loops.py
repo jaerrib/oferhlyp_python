@@ -45,6 +45,11 @@ def assign_jump(data, move_position, col, row):
 def assign_selected(data, row, col):
     active_row = data["active_row"]
     active_col = data["active_col"]
+    start_string = convert_num_to_col(active_col) + str(active_row + 1)
+    end_string = convert_num_to_col(col) + str(row + 1)
+    if data["actively_jumping"]:
+        data["move_string"] = data["move_string"] + f", "
+    data["move_string"] = data["move_string"] + f"{start_string} to {end_string}"
     data["board"][row][col] = data["active_token"]
     data["board"][active_row][active_col] = 0
     return data
@@ -58,6 +63,10 @@ def select_token(data, row, col):
 
 
 def turn_reset(data):
+    player_string = "Player " + str(data["active_player"])
+    data["move_string"] = data["move_string"] + f" ({player_string})"
+    data["move_list"].append(data["move_string"])
+    data["move_string"] = ""
     data["active_player"] = 3 - data["active_player"]
     data["active_token"], data["active_row"], data["active_col"] = None, None, None
     data["jumped_list"] = []
@@ -146,3 +155,7 @@ def get_jumped_position(move_col, move_row, col, row):
         jumped_row = move_row + 1
     jumped_position = (jumped_col, jumped_row)
     return jumped_position
+
+
+def convert_num_to_col(num):
+    return chr(ord("A") + num)

@@ -108,14 +108,26 @@
         <!--  Game Messages -->
         <div class="col">
         <p class="fs-4 fw-bold">Player {{ data.active_player }}'s turn</p>
-        <hr>
         {% if data.actively_jumping %}
             <p class="fs-3 fw-bold">Player {{ data.active_player }} is jumping</p>
             <a class="btn btn-info" href="/end-turn">End Turn</a>
         {% endif %}
-        {% if data.game_over %}
-            <p class="fs-2 fw-bold">Game Over</p>
-        {% endif %}
+        <!-- Moves -->
+        <div class="mt-3 overflow-auto form-control overflow-y-scroll"
+             style="height: 24.5rem; max-width: 32rem;">
+            <p class="fs-4">Moves:</p>
+            {% if data.game_over %}
+            <p class="fs-4 text-info fw-bold">GAME OVER</p>
+            {% endif %}
+            {% for move in data["move_list"]|reverse %}
+            <p>
+                <span class="text-secondary">{{data.move_list|length - loop.index + 1}}.</span>
+                {{move}}
+            </p>
+            {% endfor %}
+        </div>
+        <!-- End Moves -->
+
         </div>
     </div>
 

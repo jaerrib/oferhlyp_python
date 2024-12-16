@@ -5,7 +5,7 @@ class Game:
 
     def __init__(self):
         self.board = Board()
-        self.move_list = {}
+        self.move_list = []
         self.jumped_list = []
         self.result = ""
         self.active_player = 1
