@@ -3,8 +3,28 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary rounded-bottom p-2 mb-3 shadow-sm">
     <div class="container-fluid">
         <h1><a class="navbar-brand fw-bold" href="/">Oferhlýp</a></h1>
-        <a class="btn btn-info" href="/reset">RESET</a>
+        <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end"
+             id="navbarNav">
+            <ul class="navbar-nav nav-underline">
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="offcanvas"
+                       href="#rules" aria-controls="rules">How to Play</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/reset">Restart</a>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>
+
+
+{% block rules %}{% include "rules.html" %}{% endblock rules %}
 
 {% endblock header %}
