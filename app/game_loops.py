@@ -63,6 +63,8 @@ def select_token(data, row, col):
 
 
 def turn_reset(data):
+    from app.ai_player import play_computer_move
+
     player_string = "Player " + str(data["active_player"])
     data["move_string"] = data["move_string"] + f" ({player_string})"
     data["move_list"].append(data["move_string"])
@@ -70,6 +72,12 @@ def turn_reset(data):
     data["active_player"] = 3 - data["active_player"]
     data["active_token"], data["active_row"], data["active_col"] = None, None, None
     data["jumped_list"] = []
+    if (
+        data["computer_opponent"]
+        and data["active_player"] == 2
+        and not data["game_over"]
+    ):
+        data = play_computer_move(data)
     return data
 
 
