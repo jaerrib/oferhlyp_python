@@ -70,6 +70,7 @@ def turn_reset(data):
     data["move_list"].append(data["move_string"])
     data["move_string"] = ""
     data["active_player"] = 3 - data["active_player"]
+    data["actively_jumping"] = False
     data["active_token"], data["active_row"], data["active_col"] = None, None, None
     data["jumped_list"] = []
     if (
