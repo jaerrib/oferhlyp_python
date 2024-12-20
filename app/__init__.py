@@ -1,14 +1,13 @@
 from flask import Flask, redirect, render_template, session
 
-from app.ai_player import play_computer_move
 from app.game import Game
 from app.game_loops import (
-    assign_selected,
-    select_token,
-    get_available_moves,
-    turn_reset,
-    get_jumped_position,
     assign_jump,
+    assign_selected,
+    get_available_moves,
+    get_jumped_position,
+    select_token,
+    turn_reset,
 )
 
 app = Flask(__name__)
