@@ -17,7 +17,7 @@ app.secret_key = "dev"
 @app.route("/")
 def index():
     if "computer_opponent" not in session:
-        session["computer_opponent"] = False
+        session["computer_opponent"] = True
     if "data" not in session:
         game = Game()
         game.active_player = 1
