@@ -13,9 +13,29 @@
     text-align: center;
 }
 
-.score {
-    font-size: 1em;
+.square.board {
+    background-color: var(--bs-secondary);
+    border: 1px solid var(--bs-secondary-border-subtle)
 }
+
+.square.board:hover {
+    background-color: var(--bs-primary);
+    filter: brightness(1.5);
+    opacity: 0.75;
+}
+
+.square.selected {
+    border: 2px solid var(--bs-primary);
+}
+
+.token.dark:hover {
+    filter: brightness(1.25);
+}
+
+.token.light:hover {
+    filter: brightness(0.75);
+}
+
 
 @media only screen and (min-width: 768px) {
     .square {
@@ -29,37 +49,11 @@
     }
 }
 
-.stone {
+.token {
     max-height: 100%;
     max-width: 100%;
 }
 
 .stone-selected {
     outline: 2px solid var(--bs-primary);
-}
-
-.stone-disabled {
-    opacity: 0.1;
-}
-
-#suggestion.htmx-added {
-    opacity: 0;
-}
-
-#suggestion {
-    opacity: 1;
-    transition: opacity 0.5s ease-out;
-}
-
-.htmx-indicator {
-    opacity: 0;
-    transition: opacity 500ms ease-in-out;
-}
-
-.htmx-request .htmx-indicator {
-    opacity: 1
-}
-
-.htmx-request.htmx-indicator {
-    opacity: 1
 }
