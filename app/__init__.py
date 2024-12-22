@@ -2,12 +2,12 @@ from flask import Flask, redirect, render_template, session
 
 from app.game import Game
 from app.game_loops import (
-    assign_selected,
-    select_token,
-    get_available_moves,
-    turn_reset,
-    get_jumped_position,
     assign_jump,
+    assign_selected,
+    get_available_moves,
+    get_jumped_position,
+    select_token,
+    turn_reset,
 )
 
 app = Flask(__name__)
@@ -16,6 +16,8 @@ app.secret_key = "dev"
 
 @app.route("/")
 def index():
+    if "computer_opponent" not in session:
+        session["computer_opponent"] = True
     if "data" not in session:
         game = Game()
         game.active_player = 1
@@ -31,6 +33,7 @@ def index():
             "actively_jumping": False,
             "possible_moves": [],
             "move_string": "",
+            "computer_opponent": session["computer_opponent"],
         }
     return render_template("index.html", data=session["data"])
 
@@ -67,9 +70,17 @@ def process(row, col):
     return render_template("index.html", data=session["data"])
 
 
-@app.route("/reset")
+@app.route("/reset/")
 def reset():
     session.pop("data")
+    session.pop("computer_opponent")
+    return redirect("/")
+
+
+@app.route("/new-game/<int:players>")
+def new_game(players):
+    session.clear()
+    session["computer_opponent"] = True if players == 1 else False
     return redirect("/")
 
 

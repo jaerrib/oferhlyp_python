@@ -23,9 +23,9 @@
 
                             {% if data.active_row == row and data.active_col ==
                             col %}
-                            <div class="square bg-primary border border-secondary-subtle">
+                            <div class="square board selected">
                         {% else %}
-                            <div class="square bg-secondary border border-secondary-subtle">
+                            <div class="square board">
                             {% endif %}
                                 <!--Is the square empty?-->
                             {% if data.board[row][col] != 0 %}
@@ -40,15 +40,15 @@
                             {% if data.active_row == row and data.active_col ==
                             col %}
                             <img src="{{ url_for('static', filename='img/dark-king-full.svg') }}"
-                                 class="stone">
+                                 class="token dark">
                             {% else %}
                             <img src="{{ url_for('static', filename='img/dark-king-full.svg') }}"
-                                 class="stone">
+                                 class="token dark">
                             {% endif %}
                             {% else %}
                                 <!--Only has 1 HP -->
                             <img src="{{ url_for('static', filename='img/dark-king-half.svg') }}"
-                                 class="stone">
+                                 class="token dark">
                             {% endif %}
 
                             {% else %}
@@ -56,11 +56,11 @@
                                 <!--Has 2 HP? -->
                             {% if data.board[row][col].hp == 2 %}
                             <img src="{{ url_for('static', filename='img/dark-full.svg') }}"
-                                 class="stone">
+                                 class="token dark">
                             {% else %}
                                 <!--Only has 1 HP -->
                             <img src="{{ url_for('static', filename='img/dark-half.svg') }}"
-                                 class="stone">
+                                 class="token dark">
                             {% endif %}
 
                             {% endif %}
@@ -72,11 +72,11 @@
                                 <!--Has 2 HP? -->
                             {% if data.board[row][col].hp == 2 %}
                             <img src="{{ url_for('static', filename='img/light-king-full.svg') }}"
-                                 class="stone">
+                                 class="token light">
                             {% else %}
                                 <!--Only has 1 HP -->
                             <img src="{{ url_for('static', filename='img/light-king-half.svg') }}"
-                                 class="stone">
+                                 class="token light">
                             {% endif %}
 
                             {% else %}
@@ -84,11 +84,11 @@
                                 <!--Has 2 HP? -->
                             {% if data.board[row][col].hp == 2 %}
                             <img src="{{ url_for('static', filename='img/light-full.svg') }}"
-                                 class="stone">
+                                 class="token light">
                             {% else %}
                                 <!--Only has 1 HP -->
                             <img src="{{ url_for('static', filename='img/light-half.svg') }}"
-                                 class="stone">
+                                 class="token light">
                             {% endif %}
 
                             {% endif %}
