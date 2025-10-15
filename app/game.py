@@ -84,11 +84,8 @@ class Game:
         self.active_player = 3 - self.active_player
 
     @staticmethod
-    def convert_col_to_num(character) -> int | None:
-        letters: str = "ABCDEFG"
-        for index in range(0, len(letters)):
-            if character.upper() == letters[index]:
-                return index
+    def convert_col_to_num(character: str) -> int:
+        return ord(character.upper()) - ord("A")
 
     @staticmethod
     def convert_num_to_letter(num):
