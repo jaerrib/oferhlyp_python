@@ -4,20 +4,20 @@ from app.board import Board
 class Game:
 
     def __init__(self):
-        self.board = Board()
-        self.move_list = []
-        self.jumped_list = []
-        self.result = ""
-        self.active_player = 1
-        self.game_over = False
-        self.turn_over = False
-        self.active_row = None
-        self.active_col = None
+        self.board: Board = Board()
+        self.move_list: list = []
+        self.jumped_list: list = []
+        self.result: str = ""
+        self.active_player: int = 1
+        self.game_over: bool = False
+        self.turn_over: bool = False
+        self.active_row: int | None = None
+        self.active_col: int | None = None
 
     @staticmethod
-    def get_check_positions(pos_tuple):
+    def get_check_positions(pos_tuple: tuple[int, int]) -> dict:
         col, row = pos_tuple[0], pos_tuple[1]
-        position_dict = {
+        position_dict: dict = {
             "adjacent": [
                 (col - 1, row - 1),  # top left
                 (col, row - 1),  # above
@@ -42,21 +42,21 @@ class Game:
         }
         return position_dict
 
-    def is_outside(self, pos_tuple):
-        board_size = len(self.board.data)
+    def is_outside(self, pos_tuple: tuple[int, int]) -> bool:
+        board_size: int = len(self.board.data)
         return not 0 <= pos_tuple[0] < board_size or not 0 <= pos_tuple[1] < board_size
 
-    def get_available_moves(self, pos_tuple):
-        possible_moves = []
-        possible_jumps = []
-        jumpable = []
+    def get_available_moves(self, pos_tuple: tuple[int, int]) -> dict:
+        possible_moves: list = []
+        possible_jumps: list = []
+        jumpable: list = []
         if self.board.data[pos_tuple[1]][pos_tuple[0]] != 0:
-            position_dict = self.get_check_positions(pos_tuple)
+            position_dict: dict = self.get_check_positions(pos_tuple)
             for index in range(0, 8):
-                col = position_dict["adjacent"][index][0]
-                row = position_dict["adjacent"][index][1]
-                x_col = position_dict["extended"][index][0]
-                x_row = position_dict["extended"][index][1]
+                col: int = position_dict["adjacent"][index][0]
+                row: int = position_dict["adjacent"][index][1]
+                x_col: int = position_dict["extended"][index][0]
+                x_row: int = position_dict["extended"][index][1]
                 if not self.is_outside((col, row)) and self.board.data[row][col] == 0:
                     possible_moves.append(position_dict["adjacent"][index])
                 elif (
@@ -66,26 +66,26 @@ class Game:
                 ):
                     possible_jumps.append(position_dict["extended"][index])
                     jumpable.append(position_dict["adjacent"][index])
-        available_moves = {
+        available_moves: dict = {
             "possible_moves": possible_moves,
             "possible_jumps": possible_jumps,
             "jumpable": jumpable,
         }
         return available_moves
 
-    def get_all_moves(self):
+    def get_all_moves(self) -> None:
         for row in range(0, len(self.board.data)):
             for col in range(0, len(self.board.data[row])):
-                pos_check = (col, row)
-                my_moves = self.get_available_moves(pos_check)
+                pos_check: tuple[int, int] = (col, row)
+                my_moves: dict = self.get_available_moves(pos_check)
                 print(f"Moves for ({col}, {row}): {my_moves}")
 
-    def change_player(self):
+    def change_player(self) -> None:
         self.active_player = 3 - self.active_player
 
     @staticmethod
-    def convert_col_to_num(character):
-        letters = "ABCDEFG"
+    def convert_col_to_num(character) -> int | None:
+        letters: str = "ABCDEFG"
         for index in range(0, len(letters)):
             if character.upper() == letters[index]:
                 return index
