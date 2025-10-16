@@ -9,26 +9,26 @@ from app.game_loops import (
 )
 
 
-def play_computer_move(data):
+def play_computer_move(data: dict) -> dict:
     # Choose a token to move if not actively jumping
     if not data["actively_jumping"]:
-        token_list = []
+        token_list: list = []
         for row in range(0, 7):
             for col in range(0, 7):
                 if (
                     data["board"][row][col] != 0
                     and data["board"][row][col]["player"] == 2
                 ):
-                    possible_moves = get_moves(data, (col, row))
+                    possible_moves: dict = get_moves(data, (col, row))
                     if (
                         len(possible_moves["possible_moves"]) > 0
                         or len(possible_moves["possible_jumps"]) > 0
                     ):
                         token_list.append((col, row))
-        selected_token = random.choice(token_list)
+        selected_token: tuple[int, int] = random.choice(token_list)
         data = select_token(data, row=selected_token[1], col=selected_token[0])
     else:
-        selected_token = (data["active_col"], data["active_row"])
+        selected_token: tuple[int, int] = (data["active_col"], data["active_row"])
     # Determine moves available for that token
     possible_moves = get_moves(data, selected_token)
     move_choices = [
@@ -50,7 +50,7 @@ def play_computer_move(data):
         data = turn_reset(data)
         return data
     elif selected_move in possible_moves["possible_jumps"]:
-        data = assign_jump(
+        data: dict = assign_jump(
             data,
             selected_move,
             col=data["active_col"],
@@ -62,10 +62,10 @@ def play_computer_move(data):
     return data
 
 
-def get_moves(data, pos_tuple):
-    possible_moves = []
-    possible_jumps = []
-    jumpable = []
+def get_moves(data: dict, pos_tuple: tuple[int, int]) -> dict:
+    possible_moves: list = []
+    possible_jumps: list = []
+    jumpable: list = []
     if data["board"][pos_tuple[1]][pos_tuple[0]] != 0:
         position_dict = get_check_positions(pos_tuple)
         for index in range(0, 8):
@@ -82,7 +82,7 @@ def get_moves(data, pos_tuple):
             ):
                 possible_jumps.append(position_dict["extended"][index])
                 jumpable.append(position_dict["adjacent"][index])
-    available_moves = {
+    available_moves: dict = {
         "possible_moves": possible_moves,
         "possible_jumps": possible_jumps,
         "jumpable": jumpable,
@@ -90,6 +90,6 @@ def get_moves(data, pos_tuple):
     return available_moves
 
 
-def is_outside(pos_tuple):
-    board_size = 7
+def is_outside(pos_tuple: tuple[int, int]) -> bool:
+    board_size: int = 7
     return not 0 <= pos_tuple[0] < board_size or not 0 <= pos_tuple[1] < board_size
