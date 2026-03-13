@@ -1,4 +1,4 @@
-FROM python:3.13 AS builder
+FROM python:3.13-slim AS builder
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1
@@ -11,5 +11,5 @@ RUN .venv/bin/pip install -r requirements.txt
 FROM python:3.13-slim
 WORKDIR /app
 COPY --from=builder /app/.venv .venv/
-COPY .
+COPY . .
 CMD ["/app/.venv/bin/gunicorn", "-b", "0.0.0.0:8080", "app:app"]
